@@ -1,16 +1,63 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+} 
+
+/* end reset */
+
+@import url('https://fonts.googleapis.com/css?family=Days+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Changa&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Hind&display=swap');
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .App-header {
@@ -28,11 +75,308 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header {
+  border: solid yellow;
+  height: 15rem;
+  width: 100%
 }
+
+.title {
+  font-family: 'Days One', sans-serif;
+  font-size: 6rem;
+  color: white;
+  margin-top: 4rem;
+}
+
+.navbar {
+  height: 5rem;
+  display: flex;
+  justify-items: space-between;
+}
+
+.character-button, .movie-button, .planet-button {
+  margin: 1rem;
+  height: 3rem;
+  width: 20rem;
+  border-radius: 20rem;
+  background-color: black;
+  border: solid yellow;
+  font-family: 'Days One', sans-serif;
+  color: white;
+  font-size: 2rem;
+}
+
+.prompt {
+  color: white;
+  font-family: 'Days One', sans-serif;
+  font-size: 2rem;
+}
+
+.order {
+  color: white;
+  font-family: arial;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+select {
+  margin: 1rem;
+}
+
+.add-character, .add-planet {
+  margin: 1rem;
+  width: 15rem;
+  height: 3rem;
+  border: solid yellow;
+  background-color: black;
+  border-radius: 10rem;
+  color: white;
+  font-family: 'Days One', sans-serif;
+  font-size: 1.3rem;
+}
+
+.form {
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30rem;
+}
+
+.input {
+  margin: 0.5rem;
+  height: 1.5rem;
+  border-radius: 3rem;
+  text-indent: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.submit {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  height: 2rem;
+  border-radius: 3rem;
+  width: 10rem;
+  font-size: 1.2rem;
+}
+
+.character-container {
+  border-top: none;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+
+}
+
+.search-character {
+  background-image: url('https://cdn4.iconfinder.com/data/icons/basic-app/1000/BASICAPP_1-06-512.png');
+  background-position: left;
+  background-size: 2rem 2rem;
+  background-repeat: no-repeat;
+  width: 38rem;
+  height: 2rem;
+  align-self: center;
+  border: black;
+  font-size: 1.5rem;
+  border-radius: 3rem;
+  text-indent: 2rem;
+}
+
+.search-movie {
+  background-image: url('https://cdn4.iconfinder.com/data/icons/basic-app/1000/BASICAPP_1-06-512.png');
+  background-position: left;
+  background-size: 2rem 2rem;
+  background-repeat: no-repeat;
+  width: 38rem;
+  height: 2rem;
+  align-self: center;
+  border: black;
+  font-size: 1.5rem;
+  border-radius: 3rem;
+  text-indent: 2rem;
+}
+
+.search-planet {
+  background-image: url('https://cdn4.iconfinder.com/data/icons/basic-app/1000/BASICAPP_1-06-512.png');
+  background-position: left;
+  background-size: 2rem 2rem;
+  background-repeat: no-repeat;
+  width: 38rem;
+  height: 2rem;
+  align-self: center;
+  border: black;
+  font-size: 1.5rem;
+  border-radius: 3rem;
+  text-indent: 2rem;
+}
+
+.instructions {
+  font-family: arial;
+  color: white;
+  font-weight: bold;
+}
+
+.back {
+  margin-top: 0.5rem;
+  border: solid yellow 0.1rem;
+  width: 5rem;
+  background-color: black;
+  color: white;
+  border-radius: 3rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  height: 1.7rem;
+}
+
+.character-card {
+  border: solid yellow;
+  background-color: transparent;
+  height: 20rem;
+  width: 22rem;
+  margin: 2rem;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+
+.character-card:hover, .card-back {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  background-color: black;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.card-header {
+  color: white;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+
+.character-image {
+  height: 10rem;
+  width: 17rem;
+}
+
+.char-info {
+  font-family: arial;
+}
+
+.movies {
+  font-weight: bold;
+}
+
+.quote {
+  font-size: 1.5rem;
+}
+
+.movie-image {
+  height: 15rem;
+  width: 10rem;
+}
+
+.planet-image {
+  height: 10rem;
+  width: 17rem;
+}
+
+.planet-info {
+  font-family: arial;
+}
+
+.opening-crawl {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.crawl-button {
+  height: 2rem;
+  width: 11rem;
+  font-size: 1rem;
+  border-radius: 6rem;
+  border: solid white;
+}
+
+.openingcrawl-p {
+  /* font-style: italic; */
+  text-align: left;
+  font-size: 0.93rem;
+}
+
+.card-front {
+  font-family: 'Days One', sans-serif;
+}
+
+.card-back {
+  color: white;
+  font-family: 'Hind', sans-serif;
+  font-family: 'Days One', sans-serif;
+  /* overflow: hidden; */
+  perspective: 400px;
+}
+
+
+/* .crawl-div {
+  position: relative;
+  bottom: -19rem;
+  transform-origin: 50% 100%;
+  animation: crawl 30s linear;
+}
+
+@keyframes crawl {
+  0%{
+    top: 0;
+    transform: rotateX(20deg) translateZ(0);
+  }
+  100% {
+    top: -30rem;
+    transform: rotateX(25deg) translateZ(-10rem);
+  }
+} */
+
+/* .crawl-div {
+  transform: perspective(300px) rotateX(25deg);
+  transform-origin: 50% 100%;
+  text-align: justify;
+  position: absolute;
+  margin-left: -9em;
+  font-weight: bold;
+  overflow: hidden;
+  font-size: 350%;
+  height: 50em;
+  width: 18em;
+  bottom: 0;
+  left: 50%;
+}
+
+.crawl-div:after {
+  position: absolute;
+  content: ' ';
+  bottom: 60%;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.card-back {
+  animation: scroll 100s linear 16s;
+  position: absolute;
+  top: 100%;
+}
+
+@keyframes scroll {
+  0% {
+      top: 100%;
+  }
+  100% {
+      top: -170%;
+  }
+} */
