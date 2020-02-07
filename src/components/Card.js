@@ -57,7 +57,7 @@ class Card extends Component {
                     image={this.props.planet.image}/>
             ]
         }else if(this.props.pendingItem){
-            if(this.props.pendingItem.gender){
+            if(this.props.pendingItem.category === "character"){
                 return [<CardBack 
                     character={this.props.pendingItem}
                     species={this.props.pendingItem.species}
@@ -66,14 +66,16 @@ class Card extends Component {
                     force_sensitive={this.props.pendingItem.force_sensitive}
                     side={this.props.pendingItem.side}
                     role={this.props.pendingItem.role}
-                    quote={this.props.pendingItem.quote}/>,
+                    quote={this.props.pendingItem.quote}
+                    category={this.props.pendingItem.category}/>,
                     <CardFront character={this.props.pendingItem} name={this.props.pendingItem.name} image={this.props.pendingItem.image}/>
                 ]
-            }else if(this.props.pendingItem.terrain){
+            }else if(this.props.pendingItem.category === "planet"){
                 return [<CardBack
                     planet={this.props.pendingItem}
                     terrain={this.props.pendingItem.terrain}
-                    climate={this.props.pendingItem.climate}/>,
+                    climate={this.props.pendingItem.climate}
+                    category={this.props.pendingItem.category}/>,
                     <CardFront
                     planet={this.props.pendingItem}
                     name={this.props.pendingItem.name}

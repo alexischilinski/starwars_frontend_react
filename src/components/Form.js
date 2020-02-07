@@ -10,6 +10,7 @@ class Form extends Component{
         showPending: false,
         pendingItems: [],
         character: {
+            category: "",
             name: "",
             gender: "",
             species: "",
@@ -22,12 +23,21 @@ class Form extends Component{
             sith_name: ""
         },
         planet: {
+            category: "",
             name: "",
             climate: "",
             terrain: "",
             image: ""
         }
     }
+
+    // componentDidUpdate(prevProps, prevState) {
+
+    //     if (this.state.character !== prevState.character) {
+    //         console.log(this.state.character)
+    //     this.setState({character: {...this.state.character}})
+    //     }
+    //   }
 
     // componentWillMount(){
     //     this.setState({
@@ -39,12 +49,19 @@ class Form extends Component{
         if(event.target.className === "add-character"){
             this.setState({
                 characters: true,
-                planets: false
+                planets: false,
+                character: {
+                    category: "character"
+                }
             })
         }if(event.target.className === "add-planet"){
             this.setState({
                 characters: false,
-                planets: true
+                planets: true,
+                planet: {
+                    category: "planet"
+                }
+
             })
         }if(event.target.className === "pending-button"){
             this.setState({
@@ -87,19 +104,19 @@ class Form extends Component{
             })
             this.props.addPending(this.state.planet)
         }
-        // this.setState({
-        //     character: {
-        //         name: "",
-        //         gender: "",
-        //         species: "",
-        //         planet: "",
-        //         side: "",
-        //         image: "",
-        //         best_quote: "",
-        //         lightsaber_color: "",
-        //         role: ""
-        //     }
-        // })
+        this.setState({
+            character: {
+                name: "",
+                gender: "",
+                species: "",
+                planet: "",
+                side: "",
+                image: "",
+                best_quote: "",
+                lightsaber_color: "",
+                role: ""
+            }
+        })
     }
 
     render(){
@@ -109,23 +126,25 @@ class Form extends Component{
                 <button onClick={this.handleClick} className="add-character">Add Character</button>
                 <button onClick={this.handleClick} className="add-planet">Add Planet</button>
                 </div>
-                {this.state.characters === true ? [
+                {this.state.characters ? [
                                     <form onSubmit={this.handleSubmit} className="form char-form">
-                                    <input onChange={this.handleChange} className="input" type="text" name="name" placeholder="name"></input>
-                                    <input onChange={this.handleChange} className="input" type="text" name="gender" placeholder="gender"></input>
-                                    <input onChange={this.handleChange} className="input" type="text" name="species" placeholder="species"></input>
-                                    <input onChange={this.handleChange} className="input" type="text" name="planet" placeholder="homeplanet"></input>
-                                    <input onChange={this.handleChange} className="input" type="text" name="role" placeholder="role (e.g. jedi, sith, pilot, etc...)"></input>
-                                    <input onChange={this.handleChange} className="input" type="text" name="side" placeholder="alliance (e.g. empire, rebellion, etc...)"></input>
-                                    <input onChange={this.handleChange} className="input" type="text" name="lightsaber" placeholder="lightsaber color (if applicable)"></input>
-                                    <input onChange={this.handleChange} className="input" type="text" name="sith_name" placeholder="sith name (if applicable)"></input>
-                                    <input onChange={this.handleChange} className="input" type="text" name="best_quote" placeholder="this character's best quote"></input>
-                                    <input onChange={this.handleChange} className="input" type="text" name="image" placeholder="image url (no more than 200 characters)"></input>
-                                    <input className="submit" type="submit" value="Add Character"></input>
+                                        <input onChange={this.handleChange} className="input category" type="text" name="category" value="character"></input>
+                                        <input onChange={this.handleChange} className="input" type="text" name="name" placeholder="name" value={this.state.character.name}></input>
+                                        <input onChange={this.handleChange} className="input" type="text" name="gender" placeholder="gender" value={this.state.character.gender}></input>
+                                        <input onChange={this.handleChange} className="input" type="text" name="species" placeholder="species" value={this.state.character.species}></input>
+                                        <input onChange={this.handleChange} className="input" type="text" name="planet" placeholder="homeplanet" value={this.state.character.homeplanet}></input>
+                                        <input onChange={this.handleChange} className="input" type="text" name="role" placeholder="role (e.g. jedi, sith, pilot, etc...)" value={this.state.character.role}></input>
+                                        <input onChange={this.handleChange} className="input" type="text" name="side" placeholder="alliance (e.g. empire, rebellion, etc...)" value={this.state.character.side}></input>
+                                        <input onChange={this.handleChange} className="input" type="text" name="lightsaber" placeholder="lightsaber color (if applicable)" value={this.state.character.lightsaber}></input>
+                                        <input onChange={this.handleChange} className="input" type="text" name="sith_name" placeholder="sith name (if applicable)" value={this.state.character.sith_name}></input>
+                                        <input onChange={this.handleChange} className="input" type="text" name="best_quote" placeholder="this character's best quote" value={this.state.character.best_quote}></input>
+                                        <input onChange={this.handleChange} className="input" type="text" name="image" placeholder="image url (no more than 200 characters)" value={this.state.character.image}></input>
+                                        <input className="submit" type="submit" value="Add Character"></input>
                                     </form>
                                     ] : null }
-                {this.state.planets === true ? [
+                {this.state.planets ? [
                                     <form onSubmit={this.handleSubmit} className="form char-form">
+                                        <input onChange={this.handleChange} className="input category" type="text" name="category" value="planet"></input>
                                         <input onChange={this.handleChange} className="input" type="text" name="name" placeholder="name"></input>
                                         <input onChange={this.handleChange} className="input" type="text" name="climate" placeholder="climate"></input>
                                         <input onChange={this.handleChange} className="input" type="text" name="terrain" placeholder="terrain"></input>

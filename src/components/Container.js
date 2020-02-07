@@ -125,8 +125,8 @@ class Container extends Component{
                 }
             })
         } else if(this.props.pendingItems){
-            return this.props.pendingItems.map(char=>{
-                return <Card pendingItem={char}/>
+            return this.props.pendingItems.map(item=>{
+                return <Card pendingItem={item} />
             })
         }else if(this.props.animals){
             return this.filterCards().sort(this.aToZName).map(animal=>{

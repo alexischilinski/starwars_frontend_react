@@ -154,6 +154,17 @@ select {
   font-size: 1.2rem;
 }
 
+.category {
+  align-self: center;
+  text-align: center;
+  width: 9rem;
+  background-color: transparent;
+  font-family: 'Days One', sans-serif;
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+}
+
 .submit {
   margin-top: 0.5rem;
   margin-left: auto;

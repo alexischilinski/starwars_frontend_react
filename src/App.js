@@ -19,9 +19,7 @@ class App extends Component {
     showAnim: false,
     prompt: true,
     pending: true,
-    pendingItems: [],
-    // crawlShow: false,
-    // crawlText: ""
+    pendingItems: []
   }
 
 
@@ -40,11 +38,15 @@ class App extends Component {
 
     fetch('http://localhost:8000/api/usercharacters/?format=json')
       .then(response=>response.json())
-      .then(pendingItems=>this.setState({pendingItems}))
+      .then(pendingChars=>this.setState({pendingItems: [...this.state.pendingItems, pendingChars]}))
 
     fetch('http://localhost:8000/api/wildlife/?format=json')
       .then(response=>response.json())
       .then(animals=>this.setState({animals}))
+
+    fetch('http://localhost:8000/api/userplanets/?format=json')
+      .then(response=>response.json())
+      .then(pendingPlans=>this.setState({pendingItems: [...this.state.pendingItems, pendingPlans]}))
   }
 
   showCharacters = () => {
@@ -124,23 +126,11 @@ class App extends Component {
   }
 
   addPending = (item) => {
+    console.log(item)
     this.setState({
       pendingItems: [...this.state.pendingItems, item]
     })
   }
-
-  // toggleCrawl = (text) => {
-    // console.log(text)
-    // if(this.state.crawl === false){
-    //   this.setState({
-    //     crawlShow: true
-    //   })
-    // }
-    // else {
-    //   this.setState({
-    //   crawlShow: false
-    // })}
-  // }
 
   render(){
     return (
@@ -160,7 +150,6 @@ class App extends Component {
                               <Form addCharacter={this.addCharacter} addPlanet={this.addPlanet} showPending={this.showPending} pendingItems={this.state.pendingItems} addPending={this.addPending}/>
                               </div>,
                               ] : null}
-        {/* {this.state.crawl === true ? <Modal handleClose={this.toggleCrawl} crawl={this.state.crawlShow}/> : null} */}
         {this.state.showMov ? <Container movies={this.state.movies} showPrompt={this.showPrompt}/> : null}
         {this.state.showChar ? <Container characters={this.state.characters} showPrompt={this.showPrompt}/> : null}
         {this.state.showPlan ? <Container planets={this.state.planets} showPrompt={this.showPrompt}/> : null}
