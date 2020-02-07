@@ -12,10 +12,14 @@ class App extends Component {
     characters: [],
     movies: [],
     planets: [],
+    animals: [],
     showChar: false,
     showMov: false,
     showPlan: false,
+    showAnim: false,
     prompt: true,
+    pending: true,
+    pendingItems: [],
     // crawlShow: false,
     // crawlText: ""
   }
@@ -33,6 +37,14 @@ class App extends Component {
     fetch('http://localhost:8000/api/planets/?format=json')
       .then(response=>response.json())
       .then(planets=>this.setState({planets}))
+
+    fetch('http://localhost:8000/api/usercharacters/?format=json')
+      .then(response=>response.json())
+      .then(pendingItems=>this.setState({pendingItems}))
+
+    fetch('http://localhost:8000/api/wildlife/?format=json')
+      .then(response=>response.json())
+      .then(animals=>this.setState({animals}))
   }
 
   showCharacters = () => {
@@ -40,6 +52,7 @@ class App extends Component {
       showMov: false,
       showChar: true,
       showPlan: false,
+      showAnim: false,
       prompt: false
     })
   }
@@ -49,6 +62,7 @@ class App extends Component {
       showMov: true,
       showChar: false,
       showPlan: false,
+      showAnim: false,
       prompt: false
     })
   }
@@ -58,6 +72,17 @@ class App extends Component {
       showMov: false,
       showChar: false,
       showPlan: true,
+      showAnim: false,
+      prompt: false
+    })
+  }
+
+  showAnimals = () => {
+    this.setState({
+      showMov: false,
+      showChar: false,
+      showPlan: false,
+      showAnim: true,
       prompt: false
     })
   }
@@ -67,7 +92,40 @@ class App extends Component {
       showMov: false,
       showChar: false,
       showPlan: false,
+      showAnim: false,
       prompt: true
+    })
+  }
+
+  showPending = () => {
+    this.setState({
+      pending: !this.state.pending
+    })
+  }
+
+  addCharacter = (character) => {
+    fetch('http://localhost:8000/api/usercharacters/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body:JSON.stringify(character)
+    })
+  }
+
+  addPlanet = (planet) => {
+    fetch('http://localhost:8000/api/userplanets/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body:JSON.stringify(planet)
+    })
+  }
+
+  addPending = (item) => {
+    this.setState({
+      pendingItems: [...this.state.pendingItems, item]
     })
   }
 
@@ -91,24 +149,22 @@ class App extends Component {
         <NavBar
           showCharacters={this.showCharacters}
           showMovies={this.showMovies}
-          showPlanets={this.showPlanets}/>
+          showPlanets={this.showPlanets}
+          showAnimals={this.showAnimals}/>
         {this.state.prompt ? [<p className="prompt">Welcome</p> ,
                               <p className="prompt">Please choose a button above to begin your Star Wars education</p>,
                               <br></br>,
                               <br></br>,
-                              <p className="order">Haven't watched a single Star Wars movie? Here's the best order to watch the episodes:</p>,
-                              <p className="order">IV, V, VI, I, II, III, VII, VIII, IX</p>,
-                              <br></br>,
-                              <br></br>,
-                              <div className="add-div"><p className="prompt">Don't see something you want to learn about? Add it below:</p>
+                              <div className="add-div"><p className="prompt">Something missing from the database? Add it below:</p>
                               <br></br>
-                              <Form/>
+                              <Form addCharacter={this.addCharacter} addPlanet={this.addPlanet} showPending={this.showPending} pendingItems={this.state.pendingItems} addPending={this.addPending}/>
                               </div>,
                               ] : null}
         {/* {this.state.crawl === true ? <Modal handleClose={this.toggleCrawl} crawl={this.state.crawlShow}/> : null} */}
-        {this.state.showMov === true ? <Container movies={this.state.movies} showPrompt={this.showPrompt}/> : null}
-        {this.state.showChar === true ? <Container characters={this.state.characters} showPrompt={this.showPrompt}/> : null}
-        {this.state.showPlan === true ? <Container planets={this.state.planets} showPrompt={this.showPrompt}/> : null}
+        {this.state.showMov ? <Container movies={this.state.movies} showPrompt={this.showPrompt}/> : null}
+        {this.state.showChar ? <Container characters={this.state.characters} showPrompt={this.showPrompt}/> : null}
+        {this.state.showPlan ? <Container planets={this.state.planets} showPrompt={this.showPrompt}/> : null}
+        {this.state.showAnim ? <Container animals={this.state.animals} showPrompt={this.showPrompt}/> : null}
       </div>
     );
   }

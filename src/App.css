@@ -94,10 +94,10 @@ table {
   justify-items: space-between;
 }
 
-.character-button, .movie-button, .planet-button {
+.character-button, .movie-button, .planet-button, .wildlife-button {
   margin: 1rem;
   height: 3rem;
-  width: 20rem;
+  width: 17rem;
   border-radius: 20rem;
   background-color: black;
   border: solid yellow;
@@ -117,6 +117,8 @@ table {
   font-family: arial;
   font-weight: bold;
   font-size: 1rem;
+  margin: 0.2rem;
+  margin-bottom: 1rem;
 }
 
 select {
@@ -154,13 +156,22 @@ select {
 
 .submit {
   margin-top: 0.5rem;
-  margin-bottom: 1rem;
   margin-left: auto;
   margin-right: auto;
   height: 2rem;
   border-radius: 3rem;
   width: 10rem;
   font-size: 1.2rem;
+}
+
+.pending-button {
+  margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  height: 1.5rem;
+  border-radius: 3rem;
+  width: 14rem;
+  font-size: 1rem;
 }
 
 .character-container {
@@ -172,7 +183,7 @@ select {
 
 }
 
-.search-character {
+.search-character, .search-movie, .search-planet, .search-animal {
   background-image: url('https://cdn4.iconfinder.com/data/icons/basic-app/1000/BASICAPP_1-06-512.png');
   background-position: left;
   background-size: 2rem 2rem;
@@ -186,7 +197,7 @@ select {
   text-indent: 2rem;
 }
 
-.search-movie {
+/* .search-movie {
   background-image: url('https://cdn4.iconfinder.com/data/icons/basic-app/1000/BASICAPP_1-06-512.png');
   background-position: left;
   background-size: 2rem 2rem;
@@ -212,7 +223,7 @@ select {
   font-size: 1.5rem;
   border-radius: 3rem;
   text-indent: 2rem;
-}
+} */
 
 .instructions {
   font-family: arial;
@@ -240,9 +251,15 @@ select {
   margin: 2rem;
   transition: transform 1s;
   transform-style: preserve-3d;
+  display: flex;
+  justify-content: center;
 }
 
-.character-card:hover, .card-back {
+.card-back {
+  transform: rotateY(180deg);
+}
+
+.flip-card {
   transform: rotateY(180deg);
 }
 
@@ -292,23 +309,22 @@ select {
   font-family: arial;
 }
 
-.opening-crawl {
+.animal-image {
+  height: 10rem;
+  width: 17rem;
+}
+
+.animal-info {
+  font-family: arial
+}
+
+/* .opening-crawl {
   font-size: 1rem;
   font-weight: bold;
-}
-
-.crawl-button {
-  height: 2rem;
-  width: 11rem;
-  font-size: 1rem;
-  border-radius: 6rem;
-  border: solid white;
-}
+} */
 
 .openingcrawl-p {
-  /* font-style: italic; */
   text-align: left;
-  font-size: 0.93rem;
 }
 
 .card-front {
@@ -319,30 +335,60 @@ select {
   color: white;
   font-family: 'Hind', sans-serif;
   font-family: 'Days One', sans-serif;
-  /* overflow: hidden; */
-  perspective: 400px;
+  perspective: 500px;
+  overflow: hidden;;
+}
+
+/* .crawling-div {
+  width: 20rem;
+} */
+
+.crawl-effect {
+  width: 110%;
+  font-size: 1rem;
+  height: 40rem;
+  position: relative;
+  bottom: -30rem;
+  transform-origin: 50% 100%;
+  animation: crawl 300s linear;
+  line-height: 1rem;
+}
+
+.fade {
+  position: relative;
+  width: 100%;
+  height: 12rem;
+  top: 0rem;
+  background-image: linear-gradient(0deg, transparent, black 40%);
+  z-index: 10;
+}
+
+.no-display {
+  display: none;
 }
 
 
-/* .crawl-div {
+/* .crawl-effect {
   position: relative;
-  bottom: -19rem;
+  overflow: hidden;
+  bottom: -30rem;
   transform-origin: 50% 100%;
   animation: crawl 30s linear;
-}
+} */
 
 @keyframes crawl {
   0%{
-    top: 0;
+    top: 9rem;
     transform: rotateX(20deg) translateZ(0);
   }
-  100% {
-    top: -30rem;
-    transform: rotateX(25deg) translateZ(-10rem);
-  }
-} */
 
-/* .crawl-div {
+  100% {
+    top: -6000px;
+    transform: rotateX(25deg) translateZ(-2500px);
+  }
+}
+
+/* .opening-crawl {
   transform: perspective(300px) rotateX(25deg);
   transform-origin: 50% 100%;
   text-align: justify;
@@ -357,7 +403,7 @@ select {
   left: 50%;
 }
 
-.crawl-div:after {
+.opening-crawl:after {
   position: absolute;
   content: ' ';
   bottom: 60%;
@@ -366,7 +412,7 @@ select {
   top: 0;
 }
 
-.card-back {
+.opening-crawl {
   animation: scroll 100s linear 16s;
   position: absolute;
   top: 100%;

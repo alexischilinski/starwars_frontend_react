@@ -16,6 +16,12 @@ export const CardFront = (props) => {
                 <h2 className="card-header">{props.name}</h2>,
                 <img className="planet-image" src={props.image}></img>
             ]
+        } else if(props.pendingChar){
+            return [<h2 className="card-header">{props.name}</h2>,
+            <img className="character-image" src={props.image}/>]
+        } else if(props.animal){
+            return [<h2 className="card-header">{props.name}</h2>,
+            <img className="animal-image" src={props.image}/>]
         }
     }
 

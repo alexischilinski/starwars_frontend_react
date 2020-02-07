@@ -27,6 +27,12 @@ export const Search = (props) => {
                                     type="text"
                                     value={props.searchTerm}
                                     placeholder="Search by planet name.."></input> : null}
+                {props.animals ? <input 
+                                    onChange={handleChange}
+                                    className="search-animal"
+                                    type="text"
+                                    value={props.searchTerm}
+                                    placeholder="Search by animal name.."></input> : null}
                 </form>
             </div>
         )
