@@ -81,6 +81,17 @@ class Card extends Component {
                     name={this.props.pendingItem.name}
                     image={this.props.pendingItem.image}/>
                 ]
+            }else if(this.props.pendingItem.category === "animal"){
+                return [<CardBack
+                    animal={this.props.pendingItem}
+                    classification={this.props.pendingItem.classification}
+                    habitat={this.props.pendingItem.habitat}
+                    diet={this.props.pendingItem.diet}/>,
+                    <CardFront
+                    animal={this.props.pendingItem}
+                    name={this.props.pendingItem.name}
+                    image={this.props.pendingItem.image}/>
+                ]
             }
         }else if(this.props.animal){
             return [<CardBack

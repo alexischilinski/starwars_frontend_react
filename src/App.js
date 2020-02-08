@@ -47,6 +47,10 @@ class App extends Component {
     fetch('http://localhost:8000/api/userplanets/?format=json')
       .then(response=>response.json())
       .then(pendingPlans=>this.setState({pendingItems: [...this.state.pendingItems, pendingPlans].flat([1])}))
+
+    fetch('http://localhost:8000/api/userwildlife/?format=json')
+      .then(response=>response.json())
+      .then(pendingAnims=>this.setState({pendingItems: [...this.state.pendingItems, pendingAnims].flat([1])}))
   }
 
   showCharacters = () => {
@@ -125,8 +129,17 @@ class App extends Component {
     })
   }
 
+  addAnimal = (animal) => {
+    fetch('http://localhost:8000/api/userwildlife/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body:JSON.stringify(animal)
+    })
+  }
+
   addPending = (item) => {
-    console.log(item)
     this.setState({
       pendingItems: [...this.state.pendingItems, item]
     })
@@ -147,7 +160,7 @@ class App extends Component {
                               <br></br>,
                               <div className="add-div"><p className="prompt">Something missing from the database? Add it below:</p>
                               <br></br>
-                              <Form addCharacter={this.addCharacter} addPlanet={this.addPlanet} showPending={this.showPending} pendingItems={this.state.pendingItems} addPending={this.addPending}/>
+                              <Form addCharacter={this.addCharacter} addPlanet={this.addPlanet} addAnimal={this.addAnimal} showPending={this.showPending} pendingItems={this.state.pendingItems} addPending={this.addPending}/>
                               </div>,
                               ] : null}
         {this.state.showMov ? <Container movies={this.state.movies} showPrompt={this.showPrompt}/> : null}

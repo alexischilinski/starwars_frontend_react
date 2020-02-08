@@ -125,7 +125,7 @@ select {
   margin: 1rem;
 }
 
-.add-character, .add-planet {
+.add-character, .add-planet, .add-animal {
   margin: 1rem;
   width: 15rem;
   height: 3rem;

@@ -6,6 +6,7 @@ class Form extends Component{
     state = {
         characters: false,
         planets: false,
+        animals: false,
         pending: false,
         showPending: false,
         pendingItems: [],
@@ -27,6 +28,14 @@ class Form extends Component{
             name: "",
             climate: "",
             terrain: "",
+            image: ""
+        },
+        animal: {
+            category: "",
+            name: "",
+            classification: "",
+            habitat: "",
+            diet: "",
             image: ""
         }
     }
@@ -50,22 +59,33 @@ class Form extends Component{
             this.setState({
                 characters: true,
                 planets: false,
+                animals: false,
                 character: {
                     category: "character"
                 }
             })
-        }if(event.target.className === "add-planet"){
+        }else if(event.target.className === "add-planet"){
             this.setState({
                 characters: false,
                 planets: true,
+                animals: false,
                 planet: {
                     category: "planet"
                 }
 
             })
-        }if(event.target.className === "pending-button"){
+        }else if(event.target.className === "pending-button"){
             this.setState({
                 showPending: !this.state.showPending
+            })
+        }else if(event.target.className === "add-animal"){
+            this.setState({
+                characters: false,
+                planets: false,
+                animals: true,
+                animal: {
+                    category: "animal"
+                }
             })
         }
     }
@@ -85,6 +105,13 @@ class Form extends Component{
                     [event.target.name]: event.target.value
                 }
             })
+        }else if(this.state.animals){
+            this.setState({
+                animal: {
+                    ...this.state.animal,
+                    [event.target.name]: event.target.value
+                }
+            })
         }
     }
 
@@ -96,6 +123,19 @@ class Form extends Component{
                 pending: !this.state.pending
             })
             this.props.addPending(this.state.character)
+            this.setState({
+                character: {
+                    name: "",
+                    gender: "",
+                    species: "",
+                    planet: "",
+                    side: "",
+                    image: "",
+                    best_quote: "",
+                    lightsaber_color: "",
+                    role: ""
+                }
+            })
         } else if(this.state.planets){
             event.preventDefault()
             this.props.addPlanet(this.state.planet)
@@ -103,20 +143,33 @@ class Form extends Component{
                 pending: !this.state.pending
             })
             this.props.addPending(this.state.planet)
+            this.setState({
+                planet: {
+                    category: "",
+                    name: "",
+                    climate: "",
+                    terrain: "",
+                    image: ""
+                }
+            })
+        } else if(this.state.animals){
+            event.preventDefault()
+            this.props.addAnimal(this.state.animal)
+            this.setState({
+                pending: !this.state.pending
+            })
+            this.props.addPending(this.state.animal)
+            this.setState({
+                animal: {
+                    category: "",
+                    name: "",
+                    classification: "",
+                    habitat: "",
+                    diet: "",
+                    image: ""
+                }
+            })
         }
-        this.setState({
-            character: {
-                name: "",
-                gender: "",
-                species: "",
-                planet: "",
-                side: "",
-                image: "",
-                best_quote: "",
-                lightsaber_color: "",
-                role: ""
-            }
-        })
     }
 
     render(){
@@ -125,6 +178,7 @@ class Form extends Component{
                 <div>
                 <button onClick={this.handleClick} className="add-character">Add Character</button>
                 <button onClick={this.handleClick} className="add-planet">Add Planet</button>
+                <button onClick={this.handleClick} className="add-animal">Add Animal</button>
                 </div>
                 {this.state.characters ? [
                                     <form onSubmit={this.handleSubmit} className="form char-form">
@@ -138,18 +192,29 @@ class Form extends Component{
                                         <input onChange={this.handleChange} className="input" type="text" name="lightsaber" placeholder="lightsaber color (if applicable)" value={this.state.character.lightsaber}></input>
                                         <input onChange={this.handleChange} className="input" type="text" name="sith_name" placeholder="sith name (if applicable)" value={this.state.character.sith_name}></input>
                                         <input onChange={this.handleChange} className="input" type="text" name="best_quote" placeholder="this character's best quote" value={this.state.character.best_quote}></input>
-                                        <input onChange={this.handleChange} className="input" type="text" name="image" placeholder="image url (no more than 200 characters)" value={this.state.character.image}></input>
+                                        <input onChange={this.handleChange} className="input" type="text" name="image" placeholder="image url" value={this.state.character.image}></input>
                                         <input className="submit" type="submit" value="Add Character"></input>
                                     </form>
-                                    ] : null }
+                                ] : null }
                 {this.state.planets ? [
                                     <form onSubmit={this.handleSubmit} className="form char-form">
                                         <input onChange={this.handleChange} className="input category" type="text" name="category" value="planet"></input>
-                                        <input onChange={this.handleChange} className="input" type="text" name="name" placeholder="name"></input>
-                                        <input onChange={this.handleChange} className="input" type="text" name="climate" placeholder="climate"></input>
-                                        <input onChange={this.handleChange} className="input" type="text" name="terrain" placeholder="terrain"></input>
-                                        <input onChange={this.handleChange} className="input" type="text" name="image" placeholder="image url"></input>
+                                        <input onChange={this.handleChange} className="input" type="text" name="name" placeholder="name of planet" value={this.state.planet.name}></input>
+                                        <input onChange={this.handleChange} className="input" type="text" name="climate" placeholder="climate" value={this.state.planet.climate}></input>
+                                        <input onChange={this.handleChange} className="input" type="text" name="terrain" placeholder="terrain" value={this.state.planet.terrain}></input>
+                                        <input onChange={this.handleChange} className="input" type="text" name="image" placeholder="image url" value={this.state.planet.image}></input>
                                         <input className="submit" type="submit" value="Add Planet"></input>
+                                    </form>
+                                ] : null}
+                {this.state.animals ? [
+                                        <form onSubmit={this.handleSubmit} className="form char-form">
+                                        <input onChange={this.handleChange} className="input category" type="text" name="category" value="animal"></input>
+                                        <input onChange={this.handleChange} className="input" type="text" name="name" placeholder="name of animal" value={this.state.animal.name}></input>
+                                        <input onChange={this.handleChange} className="input" type="text" name="classification" placeholder="classification (e.g. mammal, reptile, etc" value={this.state.animal.classification}></input>
+                                        <input onChange={this.handleChange} className="input" type="text" name="habitat" placeholder="habitat" value={this.state.animal.habitat}></input>
+                                        <input onChange={this.handleChange} className="input" type="text" name="diet" placeholder="diet" value={this.state.animal.diet}></input>
+                                        <input onChange={this.handleChange} className="input" type="text" name="image" placeholder="image url" value={this.state.animal.image}></input>
+                                        <input className="submit" type="submit" value="Add Animal"></input>
                                     </form>
                 ] : null}
                 {this.state.pending ?

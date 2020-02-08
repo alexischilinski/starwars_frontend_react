@@ -52,20 +52,6 @@ export const CardBack = (props) => {
                         <p>Climate: {props.climate}</p>
                     </div>
                     </div>
-        // } else if(props.species){
-        //     return <div className="card-back">
-        //             <div className="char-info">
-        //                 <br></br>
-        //                 <p>Home Planet: {props.planet}</p>
-        //                 <p>Species: {props.species}</p>
-        //                 <p>Gender: {props.gender}</p>
-        //                 <br></br>
-        //                 {props.side !== "none" ? <p>Who I side with: {props.side}</p> : null}
-        //                 <p>My role: {props.role}</p>
-        //                 <br></br>
-        //                 {props.quote !== null ? <h2 className="quote">"{props.quote}"</h2> : null}
-        //             </div>
-        //         </div>
         }
         else if(props.animal){
             return <div className="card-back">
