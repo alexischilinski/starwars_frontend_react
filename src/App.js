@@ -38,7 +38,7 @@ class App extends Component {
 
     fetch('http://localhost:8000/api/usercharacters/?format=json')
       .then(response=>response.json())
-      .then(pendingChars=>this.setState({pendingItems: [...this.state.pendingItems, pendingChars]}))
+      .then(pendingChars=>this.setState({pendingItems: [...this.state.pendingItems, pendingChars].flat([1])}))
 
     fetch('http://localhost:8000/api/wildlife/?format=json')
       .then(response=>response.json())
@@ -46,7 +46,7 @@ class App extends Component {
 
     fetch('http://localhost:8000/api/userplanets/?format=json')
       .then(response=>response.json())
-      .then(pendingPlans=>this.setState({pendingItems: [...this.state.pendingItems, pendingPlans]}))
+      .then(pendingPlans=>this.setState({pendingItems: [...this.state.pendingItems, pendingPlans].flat([1])}))
   }
 
   showCharacters = () => {
