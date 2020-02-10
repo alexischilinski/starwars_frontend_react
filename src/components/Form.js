@@ -224,6 +224,9 @@ class Form extends Component{
             event.preventDefault()
             this.props.signUp(this.state.signingup)
             this.setState({
+                signup: false,
+                login: false,
+                loggedin: true,
                 signingup: {
                     username: "",
                     email: "",

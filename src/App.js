@@ -181,7 +181,10 @@ class App extends Component {
         'Content-Type': 'application/json'
       },
       body:JSON.stringify(user)
-    })
+    }).then(response=>response.json())
+      .then((result) => {
+        return result.error ? alert(result.error) : localStorage.setItem('token', result.token), localStorage.setItem('user', result.user.id)
+      })
   }
 
   logIn = (user) => {
