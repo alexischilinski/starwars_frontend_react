@@ -24,11 +24,11 @@ export const CardBack = (props) => {
                             {props.side !== "none" ? <p>My alliance(s): {props.side}</p> : null}
                             <p>My role: {props.role}</p>
                             <br></br>
-                            {props.movies ? [<h2 className="movies">Movies:</h2>,
+                            {/* {props.movies ? [<h2 className="movies">Movies:</h2>,
                                             props.movies.sort(aToZMovie).map(movie=>{
                                             return <p>{movie.title} (Episode {movie.roman_numeral})</p>
                                             })] : null }
-                            <br></br>
+                            <br></br> */}
                             {props.quote ? <h2 className="quote">"{props.quote}"</h2> : null}
                         </div>
                     </div>

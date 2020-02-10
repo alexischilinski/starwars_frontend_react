@@ -36,21 +36,47 @@ class App extends Component {
       .then(response=>response.json())
       .then(planets=>this.setState({planets}))
 
-    fetch('http://localhost:8000/api/usercharacters/?format=json')
-      .then(response=>response.json())
-      .then(pendingChars=>this.setState({pendingItems: [...this.state.pendingItems, pendingChars].flat([1])}))
+    // fetch('http://localhost:8000/api/usercharacters/?format=json')
+    //   .then(response=>response.json())
+    //   .then(pendingChars=>this.setState({pendingItems: [...this.state.pendingItems, pendingChars].flat([1])}))
 
     fetch('http://localhost:8000/api/wildlife/?format=json')
       .then(response=>response.json())
       .then(animals=>this.setState({animals}))
 
-    fetch('http://localhost:8000/api/userplanets/?format=json')
-      .then(response=>response.json())
-      .then(pendingPlans=>this.setState({pendingItems: [...this.state.pendingItems, pendingPlans].flat([1])}))
+    // fetch('http://localhost:8000/api/userplanets/?format=json')
+    //   .then(response=>response.json())
+    //   .then(pendingPlans=>this.setState({pendingItems: [...this.state.pendingItems, pendingPlans].flat([1])}))
 
-    fetch('http://localhost:8000/api/userwildlife/?format=json')
-      .then(response=>response.json())
-      .then(pendingAnims=>this.setState({pendingItems: [...this.state.pendingItems, pendingAnims].flat([1])}))
+      if(localStorage.token){
+        fetch('http://localhost:8000/api/userwildlife/', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${localStorage.token}`
+          }
+        }).then(response=>response.json())
+          .then(pendingAnims=>this.setState({pendingItems: [...this.state.pendingItems, pendingAnims].flat([1])}))
+    // fetch('http://localhost:8000/api/userwildlife/?format=json')
+    //   .then(response=>response.json())
+    //   .then(pendingAnims=>this.setState({pendingItems: [...this.state.pendingItems, pendingAnims].flat([1])}))
+        fetch('http://localhost:8000/api/usercharacters/', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${localStorage.token}`
+          }
+        }).then(response=>response.json())
+          .then(pendingChars=>this.setState({pendingItems: [...this.state.pendingItems, pendingChars].flat([1])}))
+        fetch('http://localhost:8000/api/userplanets/', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${localStorage.token}`
+          }
+        }).then(response=>response.json())
+        .then(pendingPlans=>this.setState({pendingItems: [...this.state.pendingItems, pendingPlans].flat([1])}))
+    }
   }
 
   showCharacters = () => {
@@ -113,7 +139,8 @@ class App extends Component {
     fetch('http://localhost:8000/api/usercharacters/', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${localStorage.token}`
       },
       body:JSON.stringify(character)
     })
@@ -123,7 +150,8 @@ class App extends Component {
     fetch('http://localhost:8000/api/userplanets/', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${localStorage.token}`
       },
       body:JSON.stringify(planet)
     })
@@ -133,7 +161,8 @@ class App extends Component {
     fetch('http://localhost:8000/api/userwildlife/', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${localStorage.token}`
       },
       body:JSON.stringify(animal)
     })
@@ -142,6 +171,39 @@ class App extends Component {
   addPending = (item) => {
     this.setState({
       pendingItems: [...this.state.pendingItems, item]
+    })
+  }
+
+  signUp = (user) => {
+    fetch('http://localhost:8000/api/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body:JSON.stringify(user)
+    })
+  }
+
+  logIn = (user) => {
+    fetch('http://localhost:8000/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body:JSON.stringify(user)
+    }).then(response=>response.json())
+      .then((result) => {
+        return result.error ? alert(result.error) : localStorage.setItem('token', result.token), localStorage.setItem('user', result.user.id)
+      })
+  }
+
+  logOut = () => {
+    fetch('http://localhost:8000/api/auth/logout', {
+      method: 'POST',
+      headers: {
+        // 'Content-Type': 'application/json',
+        'Authorization': `Token ${localStorage.token}`
+      }
     })
   }
 
@@ -158,9 +220,18 @@ class App extends Component {
                               <p className="prompt">Please choose a button above to begin your Star Wars education</p>,
                               <br></br>,
                               <br></br>,
-                              <div className="add-div"><p className="prompt">Something missing from the database? Add it below:</p>
+                              <div className="add-div"><p className="prompt">Something missing from the database?</p>,
+                              {/* <p className="prompt">Sign up/login to contribute:</p> */}
                               <br></br>
-                              <Form addCharacter={this.addCharacter} addPlanet={this.addPlanet} addAnimal={this.addAnimal} showPending={this.showPending} pendingItems={this.state.pendingItems} addPending={this.addPending}/>
+                              <Form addCharacter={this.addCharacter}
+                                    addPlanet={this.addPlanet}
+                                    addAnimal={this.addAnimal}
+                                    showPending={this.showPending}
+                                    pendingItems={this.state.pendingItems}
+                                    addPending={this.addPending}
+                                    signUp={this.signUp}
+                                    logIn={this.logIn}
+                                    logOut={this.logOut}/>
                               </div>,
                               ] : null}
         {this.state.showMov ? <Container movies={this.state.movies} showPrompt={this.showPrompt}/> : null}

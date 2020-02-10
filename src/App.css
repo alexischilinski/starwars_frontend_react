@@ -112,6 +112,33 @@ table {
   font-size: 2rem;
 }
 
+.signup-login {
+  color: white;
+  font-family: 'Days One', sans-serif;
+  font-size: 1rem;
+}
+
+.signup, .login, .logout {
+  width: 5rem;
+  height: 1.5rem;
+  margin: 0.5rem;
+  background-color: black;
+  color: white;
+  border-radius: 3rem;
+}
+
+.signup-form, .login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.credentials {
+  width: 15rem;
+  margin: 0.2rem;
+  font-size: 1.5rem;
+}
+
 .order {
   color: white;
   font-family: arial;
@@ -173,6 +200,8 @@ select {
   border-radius: 3rem;
   width: 10rem;
   font-size: 1.2rem;
+  background-color: black;
+  color: white;
 }
 
 .pending-button {
@@ -183,6 +212,8 @@ select {
   border-radius: 3rem;
   width: 14rem;
   font-size: 1rem;
+  background-color: black;
+  color: white;
 }
 
 .character-container {

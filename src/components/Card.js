@@ -118,6 +118,7 @@ class Card extends Component {
     }
 
     render(){
+        console.log(this.props.pendingItem)
         return(
             <div onClick={this.handleClick} className={this.state.flip ? "flip-card character-card" : "character-card"}>
                 {this.showCard()}
