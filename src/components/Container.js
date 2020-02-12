@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Card from './Card.js'
 import {Search} from './Search.js'
+import Quiz from './Quiz.js'
 
 class Container extends Component{
 
@@ -10,7 +11,9 @@ class Container extends Component{
         movies: [],
         planets: [],
         animals: [],
-        pendingItems: []
+        pendingItems: [],
+        quizItems: []
+        // correct_answer: []
     }
 
     componentDidMount = () => {
@@ -53,6 +56,16 @@ class Container extends Component{
                 planets: [],
                 characters: [],
                 pendingItems: []
+            })
+        }else if(this.props.quizcharacters){
+            this.setState({
+                characters: [],
+                movies: [],
+                planets: [],
+                animals: [],
+                pendingItems: [],
+                quizItems: this.props.quizcharacters,
+                correct_answer: this.props.quizcharacters[0]
             })
         }
     }
@@ -132,11 +145,26 @@ class Container extends Component{
             return this.filterCards().sort(this.aToZName).map(animal=>{
                 return <Card animal={animal}/>
             })
+        }else if(this.props.quizcharacters){
+            return <Quiz quizItems={this.props.quizcharacters} showPrompt={this.props.showPrompt}/>
         }
     }
 
     handleClick = () => {
         return this.props.showPrompt()
+    }
+
+    shuffleArray = (array) => {
+        let currentIndex = array.length, temporaryValue, randomIndex
+        while (currentIndex !== 0){
+            randomIndex = Math.floor(Math.random() * currentIndex)
+            currentIndex -= 1
+    
+            temporaryValue = array[currentIndex]
+            array[currentIndex] = array[randomIndex]
+            array[randomIndex] = temporaryValue
+        }
+        return array
     }
 
     render() {

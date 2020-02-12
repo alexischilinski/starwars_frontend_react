@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {CardFront} from './CardFront.js'
 import {CardBack} from './CardBack.js'
-import {FlipCard} from './FlipCard.js'
 
 class Card extends Component {
 
@@ -10,15 +9,6 @@ class Card extends Component {
     }
 
     showCard = () => {
-        // if(props.character){
-        //     return <FlipCard character={props.character}/>
-        // } else if(props.movie){
-        //     return <FlipCard movie={props.movie} toggleCrawl={props.toggleCrawl}/>
-        // } else if(props.planet){
-        //     return <FlipCard planet={props.planet} />
-        // }else if(props.pendingChar){
-        //     return <FlipCard pendingChar={props.pendingChar}/>
-        // }
         if(this.props.character){
             return [<CardBack 
                     character={this.props.character}
@@ -38,7 +28,6 @@ class Card extends Component {
                     opening_crawl={this.props.movie.opening_crawl}
                     episode={this.props.movie.episode}
                     roman_numeral={this.props.movie.roman_numeral}
-                    // toggleCrawl={this.props.toggleCrawl}
                     title={this.props.movie.title}
                     isFlipped={this.state.flip}/>,
                     <CardFront

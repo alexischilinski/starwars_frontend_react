@@ -78,7 +78,7 @@ table {
 .header {
   border: solid yellow;
   height: 15rem;
-  width: 100%
+  width: 100%;
 }
 
 .title {
@@ -110,6 +110,91 @@ table {
   color: white;
   font-family: 'Days One', sans-serif;
   font-size: 2rem;
+}
+
+.quiz-prompt {
+  color: white;
+  font-family: 'Days One', sans-serif;
+  font-size: 2rem;
+  margin-top: 2rem;
+}
+
+.character-quiz-button, .movie-quiz-button, .animal-quiz-button, .start-quiz {
+  border: solid yellow 0.09rem;
+  background-color: black;
+  color: white;
+  border-radius: 3rem;
+  width: 12rem;
+  height: 2rem;
+  font-size: 1.2rem;
+  margin: 1rem;
+  font-family: 'Days One', sans-serif;
+}
+
+.quiz-back {
+  margin-top: 0.5rem;
+  margin-right: 84rem;
+  border: solid yellow 0.09rem;
+  width: 5rem;
+  background-color: black;
+  color: white;
+  border-radius: 3rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  height: 1.7rem;
+}
+
+.score {
+  color: white;
+  font-family: 'Days One', sans-serif;
+  font-size: 1rem;
+  margin-left: 80rem;
+}
+
+.start-quiz {
+  width: 6rem;
+  border: solid yellow 0.09rem;
+}
+
+.next-question, .play-again {
+  width: 10rem;
+  height: 1.7rem;
+  border: solid yellow 0.09rem;
+  background-color: black;
+  color: white;
+  border-radius: 3rem;
+  font-family: 'Days One', sans-serif;
+  font-size: 1rem;
+  margin: 1rem;
+}
+
+.quiz-photo {
+  height: 17rem;
+  width: 32rem;
+}
+
+.quiz-title {
+  font-family: 'Days One', sans-serif;
+  color: white;
+  font-size: 2rem;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quiz-option {
+  border: solid yellow 0.09rem;
+  background-color: black;
+  color: white;
+  border-radius: 3rem;
+  width: 30rem;
+  height: 2rem;
+  font-size: 1.2rem;
+  font-family: 'Days One', sans-serif;
+  margin: 0.5rem;
 }
 
 .signup-login {
@@ -239,34 +324,6 @@ select {
   text-indent: 2rem;
 }
 
-/* .search-movie {
-  background-image: url('https://cdn4.iconfinder.com/data/icons/basic-app/1000/BASICAPP_1-06-512.png');
-  background-position: left;
-  background-size: 2rem 2rem;
-  background-repeat: no-repeat;
-  width: 38rem;
-  height: 2rem;
-  align-self: center;
-  border: black;
-  font-size: 1.5rem;
-  border-radius: 3rem;
-  text-indent: 2rem;
-}
-
-.search-planet {
-  background-image: url('https://cdn4.iconfinder.com/data/icons/basic-app/1000/BASICAPP_1-06-512.png');
-  background-position: left;
-  background-size: 2rem 2rem;
-  background-repeat: no-repeat;
-  width: 38rem;
-  height: 2rem;
-  align-self: center;
-  border: black;
-  font-size: 1.5rem;
-  border-radius: 3rem;
-  text-indent: 2rem;
-} */
-
 .instructions {
   font-family: arial;
   color: white;
@@ -275,7 +332,7 @@ select {
 
 .back {
   margin-top: 0.5rem;
-  border: solid yellow 0.1rem;
+  border: solid yellow 0.09rem;
   width: 5rem;
   background-color: black;
   color: white;

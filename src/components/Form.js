@@ -71,6 +71,14 @@ class Form extends Component{
     //     })
     // }
 
+    // componentDidUpdate(prevProps, prevState){
+    //     if(this.state.loggedin){
+    //         this.setState({
+    //             pendingItems: this.props.pendingItems
+    //         })
+    //     }else{return this.state}
+    // }
+
     handleClick = (event) =>{
         if(event.target.className === "add-character"){
             this.setState({
@@ -112,17 +120,17 @@ class Form extends Component{
         }else if(event.target.className === "login"){
             this.setState({
                 signup: false,
-                login: true
+                login: true,
             })
         }else if(event.target.className === "logout"){
             this.props.logOut()
             localStorage.removeItem('token')
             localStorage.removeItem('user')
             this.setState({
-                loggedin: false,
                 signup: false,
                 login: false,
-                showPending: false
+                showPending: false,
+                loggedin: false
             })
         }
     }
@@ -226,12 +234,12 @@ class Form extends Component{
             this.setState({
                 signup: false,
                 login: false,
-                loggedin: true,
                 signingup: {
                     username: "",
                     email: "",
                     password: ""
-                }
+                },
+                loggedin: true
             })
         }else if(this.state.login){
             event.preventDefault()
@@ -240,9 +248,7 @@ class Form extends Component{
                 loggingin: {
                     username: "",
                     password: ""
-                }
-            })
-            this.setState({
+                },
                 loggedin: true
             })
         }
@@ -262,20 +268,20 @@ class Form extends Component{
                                         : null}
                 
                 </div>
-                {this.state.signup && !this.state.loggedin ? <form onSubmit={this.handleSubmit} className="signup-form">
+                {!this.state.loggedin && this.state.signup && !this.state.loggedin ? <form onSubmit={this.handleSubmit} className="signup-form">
                                         <input onChange={this.handleChange} className="credentials" type="text" name="username" value={this.state.signingup.username} placeholder="username"></input>
                                         <input onChange={this.handleChange} className="credentials" type="text" name="email" value={this.state.signingup.email} placeholder="email"></input>
                                         <input onChange={this.handleChange} className="credentials" type="password" name="password" value={this.state.signingup.password} placeholder="password"></input>
                                         <input className="signup" type="submit" value="Sign Up"></input>
                                     </form>
                                     : null}
-                {this.state.login && !this.state.loggedin ? <form onSubmit={this.handleSubmit} className="login-form">
+                {this.state.login && !this.state.loggedin && !localStorage.token ? <form onSubmit={this.handleSubmit} className="login-form">
                                         <input onChange={this.handleChange} className="credentials" type="text" name="username" value={this.state.loggingin.username} placeholder="username"></input>
                                         <input onChange={this.handleChange} className="credentials" type="password" name="password" value={this.state.loggingin.password} placeholder="password"></input>
                                         <input className="login" type="submit" value="Login"></input>
                                     </form>
                                     : null}
-                {this.state.characters ? [
+                {this.state.loggedin && this.state.characters ? [
                                     <form onSubmit={this.handleSubmit} className="form char-form">
                                         <input onChange={this.handleChange} className="input category" type="text" name="category" value="character"></input>
                                         <input onChange={this.handleChange} className="input" type="text" name="name" placeholder="name" value={this.state.character.name}></input>
@@ -291,7 +297,7 @@ class Form extends Component{
                                         <input className="submit" type="submit" value="Add Character"></input>
                                     </form>
                                 ] : null }
-                {this.state.planets ? [
+                {this.state.loggedin && this.state.planets ? [
                                     <form onSubmit={this.handleSubmit} className="form char-form">
                                         <input onChange={this.handleChange} className="input category" type="text" name="category" value="planet"></input>
                                         <input onChange={this.handleChange} className="input" type="text" name="name" placeholder="name of planet" value={this.state.planet.name}></input>
@@ -301,7 +307,7 @@ class Form extends Component{
                                         <input className="submit" type="submit" value="Add Planet"></input>
                                     </form>
                                 ] : null}
-                {this.state.animals ? [
+                {this.state.loggedin && this.state.animals ? [
                                         <form onSubmit={this.handleSubmit} className="form char-form">
                                         <input onChange={this.handleChange} className="input category" type="text" name="category" value="animal"></input>
                                         <input onChange={this.handleChange} className="input" type="text" name="name" placeholder="name of animal" value={this.state.animal.name}></input>
