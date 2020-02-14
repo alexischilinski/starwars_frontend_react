@@ -16,7 +16,8 @@ class App extends Component {
     showMov: false,
     showPlan: false,
     showAnim: false,
-    showQuiz: false,
+    showCharQuiz: false,
+    showAnimQuiz: false,
     prompt: true,
     pending: true,
     navbar: true,
@@ -27,24 +28,24 @@ class App extends Component {
 
 
   componentWillMount(){
-    fetch('http://localhost:8000/api/characters/?format=json')
+    fetch('https://starwars101mod4.herokuapp.com/api/characters/?format=json')
       .then(response=>response.json())
       .then(characters=>this.setState({characters}))
 
-    fetch('http://localhost:8000/api/movies/?format=json')
+    fetch('https://starwars101mod4.herokuapp.com/api/movies/?format=json')
       .then(response=>response.json())
       .then(movies=>this.setState({movies}))
 
-    fetch('http://localhost:8000/api/planets/?format=json')
+    fetch('https://starwars101mod4.herokuapp.com/api/planets/?format=json')
       .then(response=>response.json())
       .then(planets=>this.setState({planets}))
 
-    fetch('http://localhost:8000/api/wildlife/?format=json')
+    fetch('https://starwars101mod4.herokuapp.com/api/wildlife/?format=json')
       .then(response=>response.json())
       .then(animals=>this.setState({animals}))
 
       if(localStorage.token){
-        fetch('http://localhost:8000/api/userwildlife/', {
+        fetch('https://starwars101mod4.herokuapp.com/api/userwildlife/', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -53,7 +54,7 @@ class App extends Component {
         }).then(response=>response.json())
           .then(pendingAnims=>this.setState({pendingItems: [...this.state.pendingItems, pendingAnims].flat([1])}))
 
-        fetch('http://localhost:8000/api/usercharacters/', {
+        fetch('https://starwars101mod4.herokuapp.com/api/usercharacters/', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -66,7 +67,7 @@ class App extends Component {
           // }))
           // .then(console.log)
 
-        fetch('http://localhost:8000/api/userplanets/', {
+        fetch('https://starwars101mod4.herokuapp.com/api/userplanets/', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -77,14 +78,28 @@ class App extends Component {
     }
   }
 
+  // componentDidUpdate(prevProps, prevState){
+  //   if(this.state.loggedin !== prevState.loggedin){
+  //     fetch('https://starwars101mod4.herokuapp.com/api/usercharacters/', {
+  //       method: 'GET',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': `Token ${localStorage.token}`
+  //       }
+  //     }).then(response=>response.json())
+  //       .then(pendingChars=>this.setState({pendingItems: [...this.state.pendingItems, pendingChars].flat([1])}))
+  //   }
+  // }
+
   showCharacters = () => {
     this.setState({
       showMov: false,
       showChar: true,
       showPlan: false,
       showAnim: false,
-      showQuiz: false,
-      prompt: false
+      showCharQuiz: false,
+      prompt: false,
+      showAnimQuiz: false,
     })
   }
 
@@ -94,8 +109,9 @@ class App extends Component {
       showChar: false,
       showPlan: false,
       showAnim: false,
-      showQuiz: false,
-      prompt: false
+      showCharQuiz: false,
+      prompt: false,
+      showAnimQuiz: false,
     })
   }
 
@@ -105,8 +121,9 @@ class App extends Component {
       showChar: false,
       showPlan: true,
       showAnim: false,
-      showQuiz: false,
-      prompt: false
+      showCharQuiz: false,
+      prompt: false,
+      showAnimQuiz: false,
     })
   }
 
@@ -116,8 +133,9 @@ class App extends Component {
       showChar: false,
       showPlan: false,
       showAnim: true,
-      showQuiz: false,
-      prompt: false
+      showCharQuiz: false,
+      prompt: false,
+      showAnimQuiz: false,
     })
   }
 
@@ -127,9 +145,10 @@ class App extends Component {
       showChar: false,
       showPlan: false,
       showAnim: false,
-      showQuiz: false,
+      showCharQuiz: false,
       navbar: true,
-      prompt: true
+      prompt: true,
+      showAnimQuiz: false,
     })
   }
 
@@ -153,46 +172,63 @@ class App extends Component {
   }
 
   addCharacter = (character) => {
-    fetch('http://localhost:8000/api/usercharacters/', {
+    fetch('https://starwars101mod4.herokuapp.com/api/usercharacters/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Token ${localStorage.token}`
       },
       body:JSON.stringify(character)
-    })
+    }).then(response=>response.json())
+    .then(char=>this.setState({pendingItems: [...this.state.pendingItems, char]}))
   }
 
   addPlanet = (planet) => {
-    fetch('http://localhost:8000/api/userplanets/', {
+    fetch('https://starwars101mod4.herokuapp.com/api/userplanets/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Token ${localStorage.token}`
       },
       body:JSON.stringify(planet)
-    })
+    }).then(response=>response.json())
+    .then(plan=>this.setState({pendingItems: [...this.state.pendingItems, plan]}))
   }
 
   addAnimal = (animal) => {
-    fetch('http://localhost:8000/api/userwildlife/', {
+    fetch('https://starwars101mod4.herokuapp.com/api/userwildlife/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Token ${localStorage.token}`
       },
       body:JSON.stringify(animal)
+    }).then(response=>response.json())
+    .then(anim=>this.setState({pendingItems: [...this.state.pendingItems, anim]}))
+  }
+
+  deleteCharacter = (character) => {
+    fetch(`https://starwars101mod4.herokuapp.com/api/usercharacters/${character.id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Token ${localStorage.token}`
+      }
     })
   }
 
-  addPending = (item) => {
+  removePending = (item) => {
+    // console.log("delete")
+    const newArray = this.state.pendingItems.filter(penditem=>{
+      return penditem === item
+    })
+    // console.log(newArray)
     this.setState({
-      pendingItems: [...this.state.pendingItems, item]
+      pendingItems: newArray
     })
   }
 
   signUp = (user) => {
-    fetch('http://localhost:8000/api/auth/register', {
+    fetch('https://starwars101mod4.herokuapp.com/api/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -202,10 +238,13 @@ class App extends Component {
       .then((result) => {
         return result.error ? alert(result.error) : localStorage.setItem('token', result.token), localStorage.setItem('user', result.user.id)
       })
+      this.setState({
+        loggedin: true
+      })
   }
 
   logIn = (user) => {
-    fetch('http://localhost:8000/api/auth/login', {
+    fetch('https://starwars101mod4.herokuapp.com/api/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -220,10 +259,13 @@ class App extends Component {
           })
         }else {return localStorage.setItem('token', result.token), localStorage.setItem('user', result.user.id)}
       })
+      this.setState({
+        loggedin: false
+      })
   }
 
   logOut = () => {
-    fetch('http://localhost:8000/api/auth/logout', {
+    fetch('https://starwars101mod4.herokuapp.com/api/auth/logout', {
       method: 'POST',
       headers: {
         // 'Content-Type': 'application/json',
@@ -243,7 +285,19 @@ class App extends Component {
         showChar: false,
         showPlan: false,
         showAnim: false,
-        showQuiz: true,
+        showCharQuiz: true,
+        showAnimQuiz: false,
+        prompt: false,
+        navbar: false
+      })
+    } else if(event.target.className === "animal-quiz-button"){
+      this.setState({
+        showMov: false,
+        showChar: false,
+        showPlan: false,
+        showAnim: false,
+        showCharQuiz: false,
+        showAnimQuiz: true,
         prompt: false,
         navbar: false
       })
@@ -270,8 +324,8 @@ class App extends Component {
                               <br></br>,
                               <div>
                               <button onClick={this.handleClick} className="character-quiz-button">Character Quiz</button>,
-                              {/* <button onClick={this.showQuiz} className="movie-quiz-button">Movie Quiz</button>, */}
-                              {/* <button onClick={this.showQuiz} className="animal-quiz-button">Animal Quiz</button>, */}
+                              {/* <button onClick={this.handleClick} className="planet-quiz-button">Planet Quiz</button>, */}
+                              <button onClick={this.handleClick} className="animal-quiz-button">Animal Quiz</button>,
                               </div>,
                               <br></br>,
                               <div className="add-div"><p className="prompt">Something missing from the database?</p>
@@ -284,14 +338,17 @@ class App extends Component {
                                     signUp={this.signUp}
                                     logIn={this.logIn}
                                     logOut={this.logOut}
-                                    error={this.state.error}/>
+                                    error={this.state.error}
+                                    deleteCharacter={this.deleteCharacter}
+                                    removePending={this.removePending}/>
                               </div>,
                               ] : null}
         {this.state.showMov ? <Container movies={this.state.movies} showPrompt={this.showPrompt}/> : null}
         {this.state.showChar ? <Container characters={this.state.characters} showPrompt={this.showPrompt}/> : null}
         {this.state.showPlan ? <Container planets={this.state.planets} showPrompt={this.showPrompt}/> : null}
         {this.state.showAnim ? <Container animals={this.state.animals} showPrompt={this.showPrompt}/> : null}
-        {this.state.showQuiz ? <Container quizcharacters={this.state.characters} showPrompt={this.showPrompt}/> : null}
+        {this.state.showCharQuiz ? <Container quizcharacters={this.state.characters} showPrompt={this.showPrompt}/> : null}
+        {this.state.showAnimQuiz ? <Container quizanimals={this.state.animals} showPrompt={this.showPrompt}/> : null}
       </div>
     );
   }

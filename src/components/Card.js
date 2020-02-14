@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import {CardFront} from './CardFront.js'
 import {CardBack} from './CardBack.js'
+import Form from './Form.js'
 
 class Card extends Component {
 
     state = {
-        flip: false
+        flip: false,
+        update: true,
     }
 
     showCard = () => {
@@ -57,7 +59,12 @@ class Card extends Component {
                     role={this.props.pendingItem.role}
                     quote={this.props.pendingItem.quote}
                     category={this.props.pendingItem.category}/>,
-                    <CardFront character={this.props.pendingItem} name={this.props.pendingItem.name} image={this.props.pendingItem.image}/>
+                    <CardFront pendingItem={this.props.pendingItem}
+                            character={this.props.pendingItem}
+                            name={this.props.pendingItem.name}
+                            image={this.props.pendingItem.image}
+                            deleteCharacter={this.props.deleteCharacter}
+                            buttonAction={this.handleClick}/>
                 ]
             }else if(this.props.pendingItem.category === "planet"){
                 return [<CardBack
@@ -96,21 +103,33 @@ class Card extends Component {
         }
     }
 
-    flipCard = () => {
+    flipCard = (event) => {
         this.setState({
             flip: !this.state.flip
         })
     }
 
-    handleClick = (event) => {
-        this.flipCard()
+    handleClick = (event, classname) => {
+        // console.log(event.target.nodeName)
+        if(classname === "delete-button" && event.target.nodeName === "BUTTON"){
+            if(this.props.pendingItem){
+                if (this.props.pendingItem.category === "character"){
+                    this.props.deleteCharacter(this.props.pendingItem)
+                    this.props.removePending(this.props.character)
+                }
+            }
+        } else if(classname === "update-button" && event.target.nodeName === "BUTTON"){
+            console.log("update")
+        } else if(event.target.nodeName === "DIV" || event.target.nodeName === "H2" || event.target.nodeName === "IMG" || event.target.nodeName === "P")
+            {return this.flipCard()}
     }
 
     render(){
-        console.log(this.props.pendingItem)
+        // console.log(this.props.pendingItem)
         return(
             <div onClick={this.handleClick} className={this.state.flip ? "flip-card character-card" : "character-card"}>
                 {this.showCard()}
+                {/* {this.state.update ? <Form pendingChar={this.props.pendingItem}/> : null} */}
             </div>
         )
     }

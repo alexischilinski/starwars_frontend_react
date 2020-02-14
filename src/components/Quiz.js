@@ -8,10 +8,6 @@ class Quiz extends Component {
         correct_answer: "",
         items: [],
         optionsArray: [],
-        // option1: "",
-        // option2: "",
-        // option3: "",
-        // option4: "",
         correct: false,
         incorrect: false,
         score: 0,
@@ -39,32 +35,62 @@ class Quiz extends Component {
 
     componentDidUpdate(prevProps, prevState){
         if(this.state.items.length !== prevState.items.length){
-            if(this.state.items.length > 70 && this.state.score < 10){
-                this.setState({
-                    correct_answer: this.state.items[0],
-                    optionsArray: this.shuffleArray([
-                        this.state.items[0].name,
-                        this.state.items[1].name,
-                        this.state.items[2].name,
-                        this.state.items[3].name,
-                    ])
-                })
-            }else if (this.state.items.length <= 70 && this.state.score < 10){
-                this.setState({
-                    game: false,
-                    correct: false,
-                    incorrect: false,
-                    lost: true,
-                    won: false
-                })
-            }else if(this.state.items.length > 70 && this.state.score === 10){
-                this.setState({
-                    game: false,
-                    correct: false,
-                    incorrect: false,
-                    lost: false,
-                    won: true
-                })
+            if(this.props.characters){
+                if(this.state.items.length > 70 && this.state.score < 10){
+                    this.setState({
+                        correct_answer: this.state.items[0],
+                        optionsArray: this.shuffleArray([
+                            this.state.items[0].name,
+                            this.state.items[1].name,
+                            this.state.items[2].name,
+                            this.state.items[3].name,
+                        ])
+                    })
+                }else if (this.state.items.length <= 70 && this.state.score < 10){
+                    this.setState({
+                        game: false,
+                        correct: false,
+                        incorrect: false,
+                        lost: true,
+                        won: false
+                    })
+                }else if(this.state.items.length > 70 && this.state.score === 10){
+                    this.setState({
+                        game: false,
+                        correct: false,
+                        incorrect: false,
+                        lost: false,
+                        won: true
+                    })
+                }
+            }else if(this.props.animals){
+                if(this.state.items.length > 4 && this.state.score < 5){
+                    this.setState({
+                        correct_answer: this.state.items[0],
+                        optionsArray: this.shuffleArray([
+                            this.state.items[0].name,
+                            this.state.items[1].name,
+                            this.state.items[2].name,
+                            this.state.items[3].name,
+                        ])
+                    })
+                }else if (this.state.items.length <= 4 && this.state.score < 5){
+                    this.setState({
+                        game: false,
+                        correct: false,
+                        incorrect: false,
+                        lost: true,
+                        won: false
+                    })
+                }else if(this.state.items.length > 4 && this.state.score === 5){
+                    this.setState({
+                        game: false,
+                        correct: false,
+                        incorrect: false,
+                        lost: false,
+                        won: true
+                    })
+                }
             }
         } else{return this.state}
     }
@@ -129,14 +155,11 @@ class Quiz extends Component {
     }
 
     render(){
-        console.log(this.state.items)
-        // console.log(this.state.items.length)
-        // console.log(this.props.quizItems)
-        // console.log(this.state.correct_answer)
-        // console.log(this.state.optionsArray)
         return(
             <div>
                 <button onClick={this.handleClick} className="quiz-back">Go Back</button>
+                {this.props.characters ? <p className="prompt">character quiz</p> : null}
+                {this.props.animals ? <p className="prompt">animal quiz</p> : null}
                 {!this.state.start ? <p className="score">Score: {this.state.score}</p> : null }
                 {this.state.start ? <button onClick={this.handleClick} className="start-quiz">Start</button> : null}
                 {this.state.game ? [

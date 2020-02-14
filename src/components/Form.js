@@ -12,6 +12,10 @@ class Form extends Component{
         animals: false,
         pending: false,
         showPending: false,
+        update: false,
+        buttontext: true,
+        display: "display",
+        hide: "hide",
         pendingItems: [],
         character: {
             user: localStorage.getItem('user'),
@@ -85,6 +89,7 @@ class Form extends Component{
                 characters: true,
                 planets: false,
                 animals: false,
+                loggedin: true,
                 character: {
                     category: "character"
                 }
@@ -94,6 +99,7 @@ class Form extends Component{
                 characters: false,
                 planets: true,
                 animals: false,
+                loggedin: true,
                 planet: {
                     category: "planet"
                 }
@@ -108,6 +114,7 @@ class Form extends Component{
                 characters: false,
                 planets: false,
                 animals: true,
+                loggedin: true,
                 animal: {
                     category: "animal"
                 }
@@ -181,7 +188,7 @@ class Form extends Component{
             this.setState({
                 pending: !this.state.pending
             })
-            this.props.addPending(this.state.character)
+            // this.props.addPending(this.state.character)
             this.setState({
                 character: {
                     name: "",
@@ -201,7 +208,7 @@ class Form extends Component{
             this.setState({
                 pending: !this.state.pending
             })
-            this.props.addPending(this.state.planet)
+            // this.props.addPending(this.state.planet)
             this.setState({
                 planet: {
                     category: "",
@@ -217,7 +224,7 @@ class Form extends Component{
             this.setState({
                 pending: !this.state.pending
             })
-            this.props.addPending(this.state.animal)
+            // this.props.addPending(this.state.animal)
             this.setState({
                 animal: {
                     category: "",
@@ -322,7 +329,7 @@ class Form extends Component{
                 <p className="order">Pending approval to be added to database</p> : null}
                 <br></br>
                 {this.state.loggedin || localStorage.token ? <button onClick={this.handleClick} className="pending-button">Show all pending requests</button> : null }
-                {this.state.showPending && this.props.pendingItems.length > 0 ? <Container pendingItems={this.props.pendingItems}/> : null}
+                {this.state.showPending && this.props.pendingItems.length > 0 ? <Container pendingItems={this.props.pendingItems} deleteCharacter={this.props.deleteCharacter} removePending={this.props.removePending}/> : null}
                 {this.props.pendingItems.length === 0 && this.state.showPending ? <p className="order">There are no pending requests</p> : null}
                 <section>
                 {this.state.loggedin || localStorage.token ? <button onClick={this.handleClick} className="logout">Logout</button> : null}

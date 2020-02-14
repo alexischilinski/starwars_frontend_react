@@ -139,14 +139,16 @@ class Container extends Component{
             })
         } else if(this.props.pendingItems){
             return this.props.pendingItems.map(item=>{
-                return <Card pendingItem={item} />
+                return <Card pendingItem={item} deleteCharacter={this.props.deleteCharacter} removePending={this.props.removePending}/>
             })
         }else if(this.props.animals){
             return this.filterCards().sort(this.aToZName).map(animal=>{
                 return <Card animal={animal}/>
             })
         }else if(this.props.quizcharacters){
-            return <Quiz quizItems={this.props.quizcharacters} showPrompt={this.props.showPrompt}/>
+            return <Quiz characters={this.props.quizcharacters} quizItems={this.props.quizcharacters} showPrompt={this.props.showPrompt}/>
+        }else if(this.props.quizanimals){
+            return <Quiz animals={this.props.quizanimals} quizItems={this.props.quizanimals} showPrompt={this.props.showPrompt}/>
         }
     }
 

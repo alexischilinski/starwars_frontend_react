@@ -119,7 +119,7 @@ table {
   margin-top: 2rem;
 }
 
-.character-quiz-button, .movie-quiz-button, .animal-quiz-button, .start-quiz {
+.character-quiz-button, .planet-quiz-button, .animal-quiz-button, .start-quiz {
   border: solid yellow 0.09rem;
   background-color: black;
   color: white;
@@ -368,6 +368,18 @@ select {
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+}
+
+.delete-button, .update-button {
+  margin: 0.5rem;
+  border: solid yellow 0.09rem;
+  width: 5rem;
+  background-color: black;
+  color: white;
+  border-radius: 3rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  height: 1.7rem;
 }
 
 .card-header {
