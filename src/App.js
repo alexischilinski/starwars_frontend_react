@@ -328,20 +328,20 @@ class App extends Component {
                               <button onClick={this.handleClick} className="animal-quiz-button">Animal Quiz</button>,
                               </div>,
                               <br></br>,
-                              <div className="add-div"><p className="prompt">Something missing from the database?</p>
-                              <Form addCharacter={this.addCharacter}
-                                    addPlanet={this.addPlanet}
-                                    addAnimal={this.addAnimal}
-                                    showPending={this.showPending}
-                                    pendingItems={this.state.pendingItems}
-                                    addPending={this.addPending}
-                                    signUp={this.signUp}
-                                    logIn={this.logIn}
-                                    logOut={this.logOut}
-                                    error={this.state.error}
-                                    deleteCharacter={this.deleteCharacter}
-                                    removePending={this.removePending}/>
-                              </div>,
+                              // <div className="add-div"><p className="prompt add-prompt">Something missing from the database?</p>
+                              // <Form addCharacter={this.addCharacter}
+                              //       addPlanet={this.addPlanet}
+                              //       addAnimal={this.addAnimal}
+                              //       showPending={this.showPending}
+                              //       pendingItems={this.state.pendingItems}
+                              //       addPending={this.addPending}
+                              //       signUp={this.signUp}
+                              //       logIn={this.logIn}
+                              //       logOut={this.logOut}
+                              //       error={this.state.error}
+                              //       deleteCharacter={this.deleteCharacter}
+                              //       removePending={this.removePending}/>
+                              // </div>,
                               ] : null}
         {this.state.showMov ? <Container movies={this.state.movies} showPrompt={this.showPrompt}/> : null}
         {this.state.showChar ? <Container characters={this.state.characters} showPrompt={this.showPrompt}/> : null}

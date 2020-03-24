@@ -76,26 +76,28 @@ table {
 }
 
 .header {
-  border: solid yellow;
-  height: 15rem;
-  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
 }
 
 .title {
   font-family: 'Days One', sans-serif;
-  font-size: 6rem;
+  font-size: 400%;
   color: white;
   margin-top: 4rem;
 }
 
 .navbar {
-  height: 5rem;
+  /* height: 5rem; */
+  width: 100%;
   display: flex;
-  justify-items: space-between;
+  flex-wrap: wrap;
+  justify-content: center
 }
 
 .character-button, .movie-button, .planet-button, .wildlife-button {
-  margin: 1rem;
+  margin: 1%;
   height: 3rem;
   width: 17rem;
   border-radius: 20rem;
@@ -103,20 +105,25 @@ table {
   border: solid yellow;
   font-family: 'Days One', sans-serif;
   color: white;
-  font-size: 2rem;
+  font-size: 150%
 }
 
 .prompt {
   color: white;
   font-family: 'Days One', sans-serif;
-  font-size: 2rem;
+  font-size: 200%;
 }
 
 .quiz-prompt {
   color: white;
   font-family: 'Days One', sans-serif;
-  font-size: 2rem;
+  font-size: 200%;
   margin-top: 2rem;
+}
+
+.quiz-container {
+  display: flex;
+  flex-direction: column;
 }
 
 .character-quiz-button, .planet-quiz-button, .animal-quiz-button, .start-quiz {
@@ -127,13 +134,14 @@ table {
   width: 12rem;
   height: 2rem;
   font-size: 1.2rem;
-  margin: 1rem;
+  margin: 1%;
   font-family: 'Days One', sans-serif;
 }
 
 .quiz-back {
-  margin-top: 0.5rem;
-  margin-right: 84rem;
+  margin: 1%;
+  /* margin-right: 84rem; */
+  align-self: center;
   border: solid yellow 0.09rem;
   width: 5rem;
   background-color: black;
@@ -148,12 +156,16 @@ table {
   color: white;
   font-family: 'Days One', sans-serif;
   font-size: 1rem;
-  margin-left: 80rem;
+  align-self: center;
+  margin: 1%;
+  /* margin-left: 80rem; */
 }
 
 .start-quiz {
   width: 6rem;
   border: solid yellow 0.09rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .next-question, .play-again {
@@ -165,12 +177,16 @@ table {
   border-radius: 3rem;
   font-family: 'Days One', sans-serif;
   font-size: 1rem;
-  margin: 1rem;
+  margin: 1%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .quiz-photo {
-  height: 17rem;
-  width: 32rem;
+  height: auto;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .quiz-title {
@@ -190,7 +206,7 @@ table {
   background-color: black;
   color: white;
   border-radius: 3rem;
-  width: 30rem;
+  width: 60%;
   height: 2rem;
   font-size: 1.2rem;
   font-family: 'Days One', sans-serif;
@@ -238,7 +254,7 @@ select {
 }
 
 .add-character, .add-planet, .add-animal {
-  margin: 1rem;
+  margin: 1%;
   width: 15rem;
   height: 3rem;
   border: solid yellow;
@@ -264,6 +280,9 @@ select {
   border-radius: 3rem;
   text-indent: 0.5rem;
   font-size: 1.2rem;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .category {
@@ -290,7 +309,7 @@ select {
 }
 
 .pending-button {
-  margin-bottom: 1rem;
+  margin-bottom: 5%;
   margin-left: auto;
   margin-right: auto;
   height: 1.5rem;
@@ -315,11 +334,11 @@ select {
   background-position: left;
   background-size: 2rem 2rem;
   background-repeat: no-repeat;
-  width: 38rem;
+  width: 80%;
   height: 2rem;
   align-self: center;
   border: black;
-  font-size: 1.5rem;
+  font-size: 70%;
   border-radius: 3rem;
   text-indent: 2rem;
 }

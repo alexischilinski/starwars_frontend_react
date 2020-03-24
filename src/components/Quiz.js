@@ -156,7 +156,7 @@ class Quiz extends Component {
 
     render(){
         return(
-            <div>
+            <div className="quiz-container">
                 <button onClick={this.handleClick} className="quiz-back">Go Back</button>
                 {this.props.characters ? <p className="prompt">character quiz</p> : null}
                 {this.props.animals ? <p className="prompt">animal quiz</p> : null}
